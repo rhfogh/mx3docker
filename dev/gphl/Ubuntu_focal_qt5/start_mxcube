@@ -39,11 +39,12 @@ OUTPUT_HOME="/home/rhfogh/dockerhome/"
 # GPHL-specific directories for mounting
 # Note: These are the same from insisde and outside the docker
 # and so must be either identical or used on only one side.
-GPHL_RELEASE_ROOT="/home/rhfogh/Software/GPhL/"
-GPHL_SETUP_ROOT="/home/rhfogh/Software/GPhL/mxcube_setup/"
+# GPHL_RELEASE_ROOT="/alt/rhfogh/Software/GPhL/"
+# GPHL_SETUP_ROOT="/alt/rhfogh/Software/GPhL/mxcube_setup/"
+GPHL_SOFTWARE_ROOT="/alt/rhfogh/Software/"
 
 # Location for output data - must be the same inside and outside docker
-DATA_ROOT="/home/rhfogh/calc/mxcube_data"
+DATA_ROOT="/alt/rhfogh/calc/mxcube_data"
 
 # End of settable parameters.
 
@@ -67,8 +68,7 @@ exec docker run -it \
 -e CUSTOM_BRICKS_PATH=$CUSTOM_BRICKS_PATH \
 -e PYTHONPATH=$MXCUBE_BASE/mxcubeqt:$MXCUBE_BASE/mxcubecore \
 -v $MXCUBE_ROOT:/MXCuBE \
--v $GPHL_RELEASE_ROOT:$GPHL_RELEASE_ROOT \
--v $GPHL_SETUP_ROOT:$GPHL_SETUP_ROOT \
+-v $GPHL_SOFTWARE_ROOT:$GPHL_SOFTWARE_ROOT \
 -v $DATA_ROOT:$DATA_ROOT \
 -v $OUTPUT_HOME:$DOCKER_HOME \
 -v /tmp/.X11-unix:/tmp/.X11-unix \
