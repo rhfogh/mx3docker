@@ -26,8 +26,8 @@ RUN pip install py4j
 # Needed for GPhL simcal
 RUN pip install f90nml
 
-# Needed for GPhL stratcal rotation matrices
-RUN pip install mgen
+# # Needed for GPhL stratcal rotation matrices
+# RUN pip install mgen
 
 # Add user and group so files on main machine get to belong to user instead of root
 # NB this must be adjusted to the test user. TODO move to separate docker
@@ -45,7 +45,7 @@ RUN pip install mgen
 # RUN mkdir -p /archive
 # RUN mkdir -p /scratch_fs1
 # RUN mkdir -p /public/xtal
-RUN mkdir -p /mnt/scrstch
+RUN mkdir -p /alt/rhfogh
 
 
 # Used instead of Entrypoint to allow alternative commands to be run
