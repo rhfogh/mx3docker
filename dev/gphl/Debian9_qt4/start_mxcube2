@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-CONTAINER=mx3_deb9_qt4_gphl5
+CONTAINER=mxcube2_dev_qt4_gphl6
 
 # The following variables should be checked and (re)set as needed
 
@@ -42,8 +42,9 @@ OUTPUT_HOME="/home/rhfogh/dockerhome/"
 # GPHL-specific directories for mounting
 # Note: These are the same from insisde and outside the docker
 # and so must be either identical or used on only one side.
- GPHL_RELEASE_ROOT="/alt/rhfogh/Software/GPhL/"
- GPHL_SETUP_ROOT="/alt/rhfogh/Software/GPhL/mxcube_setup/"
+# GPHL_RELEASE_ROOT="/alt/rhfogh/Software/GPhL/"
+# GPHL_SETUP_ROOT="/alt/rhfogh/Software/GPhL/mxcube_setup/"
+ GPHL_SOFTWARE_ROOT="/alt/rhfogh/Software/"
 
 # Location for output data - must be the same inside and outside docker
 DATA_ROOT="/alt/rhfogh/calc/mxcube_data"
@@ -70,8 +71,7 @@ exec docker run -it \
 -e CUSTOM_HARDWARE_OBJECTS_PATH=$CUSTOM_HARDWARE_OBJECTS_PATH \
 -e CUSTOM_BRICKS_PATH=$CUSTOM_BRICKS_PATH \
 -v $MXCUBE2_ROOT:/MXCuBE/mxcube \
--v $GPHL_RELEASE_ROOT:$GPHL_RELEASE_ROOT \
--v $GPHL_SETUP_ROOT:$GPHL_SETUP_ROOT \
+-v $GPHL_SOFTWARE_ROOT:$GPHL_SOFTWARE_ROOT \
 -v $DATA_ROOT:$DATA_ROOT \
 -v $OUTPUT_HOME:$DOCKER_HOME \
 -v /tmp/.X11-unix:/tmp/.X11-unix \
