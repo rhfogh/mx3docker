@@ -1,0 +1,75 @@
+#!/usr/bin/env bash
+
+CONTAINER=mxcubeqt_debian9_qt4b
+
+# The following variables should be checked and (re)set as needed
+#
+MXCUBE_BASE="/MXCuBE"
+MXCUBE_CORE="${MXCUBE_BASE}/mxcubecore/mxcubecore"
+CUSTOM_BRICKS_PATH=""
+CUSTOM_HARDWARE_OBJECTS_PATH="${MXCUBE_CORE}/HardwareObjects/mockup"
+
+MOCKUP_XML_PATH="${MXCUBE_CORE}/configuration/mockup"
+MXCUBE_CORE_CONFIG_PATH="${MOCKUP_XML_PATH}/gphl:${MOCKUP_XML_PATH}/qt:${MOCKUP_XML_PATH}"
+
+# ALBA:
+MXCUBE_CORE_CONFIG_PATH="${MXCUBE_CORE_CONFIG_PATH}:${MXCUBE_CORE}/configuration/alba_xaloc13"
+
+# User and mac address
+#
+# Mac address for docker - nededed for GPhL license
+MAC_ADDRESS="54:ee:75:b6:8e:d3"
+#
+# User for docker - for giving correct file ownership.
+DOCKER_USER_ID="1000:100"
+# DOCKER_USER_ID="1158:3001"
+# CONSIDER SOMETHING LKE --user $(id -u):$(id -g)
+# User name - used only for file names etc.
+USER_NAME="test_user"
+
+# Directories set-up
+#
+# MXCuBE installation is in /MXCuBE/mxcube, as per standard
+#
+# Home directory, used for e.g. .config and .ssh. Externally mounted.
+DOCKER_HOME="/home/rhfogh/"
+OUTPUT_HOME="/home/rhfogh/dockerhome/"
+# GPhL software.
+
+# GPHL-specific directories for mounting
+# Note: These are the same from insisde and outside the docker
+# and so must be either identical or used on only one side.
+# GPHL_RELEASE_ROOT="/alt/rhfogh/Software/GPhL/"
+# GPHL_SETUP_ROOT="/alt/rhfogh/Software/GPhL/mxcube_setup/"
+GPHL_SOFTWARE_ROOT="/alt/rhfogh/Software/"
+
+# Location for output data - must be the same inside and outside docker
+DATA_ROOT="/alt/rhfogh/calc/mxcube_data"
+
+# End of settable parameters.
+
+
+xhost +local:
+# Command needed to run GPhL workflows
+# Add in this for debug
+# -p 8050:8050 \
+exec docker run -it \
+--mac-address $MAC_ADDRESS \
+-p 25333:25333 \
+-p 25334:25334 \
+-h=$CONTAINER \
+-u $DOCKER_USER_ID \
+-e HOME=$DOCKER_HOME \
+-e USER=$USER_NAME \
+-e DISPLAY=$DISPLAY \
+-e QT_X11_NO_MITSHM=1 \
+-e MXCUBE_CORE_CONFIG_PATH=$MXCUBE_CORE_CONFIG_PATH \
+-e CUSTOM_HARDWARE_OBJECTS_PATH=$CUSTOM_HARDWARE_OBJECTS_PATH \
+-e CUSTOM_BRICKS_PATH=$CUSTOM_BRICKS_PATH \
+-e PYTHONPATH=$MXCUBE_BASE/mxcubeqt:$MXCUBE_BASE/mxcubecore \
+-v $MXCUBE_ROOT:/MXCuBE \
+-v $GPHL_SOFTWARE_ROOT:$GPHL_SOFTWARE_ROOT \
+-v $DATA_ROOT:$DATA_ROOT \
+-v $OUTPUT_HOME:$DOCKER_HOME \
+-v /tmp/.X11-unix:/tmp/.X11-unix \
+$CONTAINER
