@@ -1,4 +1,4 @@
-FROM ubuntu_qt5_python3_8b
+FROM ubuntu_qt5_python3_8d
 
 RUN apt-get update
 

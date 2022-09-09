@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-CONTAINER=ubuntu_qt5_38_use_b
+CONTAINER=ubuntu_qt5_38_use_d
 
 # The following variables should be checked and (re)set as needed
 #

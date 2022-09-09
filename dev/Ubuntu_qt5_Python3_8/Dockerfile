@@ -12,7 +12,7 @@ RUN apt-get install -y build-essential
 
 # Install 'top-level' packages
 #RUN apt-get install -y python3-scipy
-RUN apt-get install -y python3-pyqtgraph
+#RUN apt-get install -y python3-pyqtgraph
 
 # Get and update pip
 RUN apt-get install python3-pip -y
@@ -36,7 +36,11 @@ RUN pip install suds-py3==1.4.5.0
 RUN pip install psutil==5.9.1
 RUN pip install gipc==1.4.0
 
-# GPhL: f90nml, mgen, and py4j are required for GPhL Workflow and emulation
+RUN apt-get install -y python3-pyqtgraph
+
+## Needed. Version 0.11.0 seems to be the one matching Ubnuntu focal LTS
+#RUN pip install pyqtgraph==0.11.0
+
+# GPhL: f90nml, and py4j are required for GPhL Workflow and emulation
 RUN pip install py4j==0.10.9.5
 RUN pip install f90nml==1.4.3
-RUN pip install mgen
