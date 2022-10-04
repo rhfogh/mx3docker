@@ -22,4 +22,5 @@ WORKDIR /MXCuBE
 RUN mkdir -p /alt/rhfogh
 
 # Used instead of Entrypoint to allow alternative commands to be run
-CMD ["python3",  "/MXCuBE/mxcubeqt/mxcubeqt/__main__.py", "--pyqt5", "--mockupMode", "--userFileDir", "/alt/rhfogh/calc/mxcube_data/.mxcube"]
+#CMD ["python3",  "/MXCuBE/mxcubeqt/mxcubeqt/__main__.py", "--pyqt5", "--mockupMode", "--userFileDir", "/alt/rhfogh/calc/mxcube_data/.mxcube"]
+CMD ["python3",  "/MXCuBE/mxcubeqt/mxcubeqt/__main__.py", "--pyqt5", "--userFileDir", "/alt/rhfogh/calc/mxcube_data/.mxcube"]
