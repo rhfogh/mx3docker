@@ -1,6 +1,7 @@
 FROM ubuntu_qt5_python3_8d
 
 RUN apt-get update
+RUN pip install devtools
 
 RUN mkdir -p /MXCuBE
 WORKDIR /MXCuBE
