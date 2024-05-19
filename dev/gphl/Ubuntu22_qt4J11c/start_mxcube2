@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-CONTAINER=mxcube2_ubuntu22_qt4j11b
+CONTAINER=mxcube2_ubuntu22_qt4j11c
 
 # The following variables should be checked and (re)set as needed
 

@@ -11,7 +11,7 @@ RUN apt-get install -y python2.7-minimal python-pip
 RUN apt-get install -y openjdk-11-jre-headless
 
 RUN pip2 install wheel
-RUN pip2 install python-qt suds scipy pyqtgraph gevent jsonpickle ruamel.yaml PyDispatcher pylint lxml jsonschema
+RUN pip2 install python-qt suds scipy pyqtgraph gevent jsonpickle pyyaml PyDispatcher pylint lxml jsonschema
 
 RUN pip2 install py4j f90nml mgen
 
