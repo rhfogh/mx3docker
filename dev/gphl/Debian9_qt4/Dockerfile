@@ -45,7 +45,7 @@ RUN pip install f90nml
 # RUN mkdir -p /archive
 # RUN mkdir -p /scratch_fs1
 # RUN mkdir -p /public/xtal
-RUN mkdir -p /alt/rhfogh
+# RUN mkdir -p /alt/rhfogh
 
 
 # Used instead of Entrypoint to allow alternative commands to be run

@@ -20,7 +20,7 @@ RUN pip2 install py4j f90nml mgen
 # RUN mkdir -p /archive
 # RUN mkdir -p /scratch_fs1
 # RUN mkdir -p /public/xtal
-RUN mkdir -p /alt/rhfogh
+# RUN mkdir -p /alt/rhfogh
 RUN mkdir -p /MXCuBE/mxcube
 WORKDIR /MXCuBE/mxcube
 

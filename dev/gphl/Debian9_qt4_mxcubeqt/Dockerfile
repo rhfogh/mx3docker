@@ -45,9 +45,9 @@ RUN pip install f90nml
 # RUN mkdir -p /archive
 # RUN mkdir -p /scratch_fs1
 # RUN mkdir -p /public/xtal
-RUN mkdir -p /alt/rhfogh
+# RUN mkdir -p /alt/rhfogh
 
 
 # Used instead of Entrypoint to allow alternative commands to be run
-#CMD ["python3",  "/MXCuBE/mxcubeqt/mxcubeqt/__main__.py", "--pyqt5", "--mockupMode", "--userFileDir", "/alt/rhfogh/calc/mxcube_data/.mxcube"]
-CMD ["python",  "/MXCuBE/mxcubeqt/mxcubeqt/__main__.py", "--pyqt5", "--mockupMode", "--userFileDir", "/alt/rhfogh/calc/mxcube_data/.mxcube"]
+#CMD ["python3",  "/MXCuBE/mxcubeqt/mxcubeqt/__main__.py", "--pyqt5", "--mockupMode", "--userFileDir", "/home/rhfogh/calc/mxcube_data/.mxcube"]
+CMD ["python",  "/MXCuBE/mxcubeqt/mxcubeqt/__main__.py", "--pyqt5", "--mockupMode", "--userFileDir", "/home/rhfogh/calc/mxcube_data/.mxcube"]
