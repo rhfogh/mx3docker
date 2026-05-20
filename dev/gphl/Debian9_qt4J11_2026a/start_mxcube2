@@ -1,0 +1,78 @@
+#!/usr/bin/env bash
+
+CONTAINER=mx3_deb9b_qt4j11_2026a
+
+# The following variables should be checked and (re)set as needed
+
+# MXCuBE additional lookup directories
+#
+# Examples of alternative path settings:
+HO_SERVER="/MXCuBE/mxcube/HardwareRepository/"
+HO_CONFIGURATION=${HO_SERVER}/configuration
+# HO_CONFIGURATION="/MXCuBE/mxcube/ExampleFiles/HardwareObjects.xml"
+# CUSTOM_HARDWARE_OBJECTS_PATH="/MXCuBE/mxcube/extra_HO_test_1:/MXCuBE/mxcube/extra_HO_test_2"
+# CUSTOM_BRICKS_PATH="/MXCuBE/mxcube/extra_brick_test_1:/MXCuBE/mxcube/extra_brick_test_2"
+HARDWARE_REPOSITORY_SERVER="${HO_CONFIGURATION}/gphl_mock:${HO_CONFIGURATION}/xml-qt:${HO_CONFIGURATION}/embl_hh_p14"
+# HARDWARE_REPOSITORY_SERVER="${HO_CONFIGURATION}/gphl_mock:${HO_CONFIGURATION}:${HO_CONFIGURATION}/alba_xaloc13"
+CUSTOM_HARDWARE_OBJECTS_PATH="/MXCuBE/mxcube/HardwareRepository/HardwareObjects/mockup"
+
+CUSTOM_BRICKS_PATH=""
+
+# User and mac address
+#
+# Mac address for docker - nededed for GPhL license
+MAC_ADDRESS="54:ee:75:b6:8e:d3"
+#
+# User for docker - for giving correct file ownership.
+DOCKER_USER_ID="1000:100"
+# DOCKER_USER_ID="1158:3001"
+# CONSIDER SOMETHING LKE --user $(id -u):$(id -g)
+# User name - used only for file names etc.
+USER_NAME="test_user"
+
+# Directories set-up
+#
+# MXCuBE installation is in /MXCuBE/mxcube, as per standard
+#
+# Home directory, used for e.g. .config and .ssh. Externally mounted.
+DOCKER_HOME="/home/rhfogh/"
+OUTPUT_HOME="/home/rhfogh/dockerhome/"
+# GPhL software.
+
+# GPHL-specific directories for mounting
+# Note: These are the same from insisde and outside the docker
+# and so must be either identical or used on only one side.
+# GPHL_RELEASE_ROOT="/home/rhfogh/Software/GPhL/"
+# GPHL_SETUP_ROOT="/home/rhfogh/Software/GPhL/mxcube_setup/"
+ GPHL_SOFTWARE_ROOT="/home/rhfogh/Software/"
+
+# Location for output data - must be the same inside and outside docker
+DATA_ROOT="/home/rhfogh/calc/mxcube_data"
+
+
+# End of settable parameters.
+
+
+xhost +local:
+# Command needed to run GPhL workflows
+# Add in this for debug
+# -p 8050:8050 \
+exec docker run -it \
+--mac-address $MAC_ADDRESS \
+-p 25333:25333 \
+-p 25334:25334 \
+-h=$CONTAINER \
+-u $DOCKER_USER_ID \
+-e HOME=$DOCKER_HOME \
+-e USER=$USER_NAME \
+-e DISPLAY=$DISPLAY \
+-e QT_X11_NO_MITSHM=1 \
+-e HARDWARE_REPOSITORY_SERVER=$HARDWARE_REPOSITORY_SERVER \
+-e CUSTOM_HARDWARE_OBJECTS_PATH=$CUSTOM_HARDWARE_OBJECTS_PATH \
+-e CUSTOM_BRICKS_PATH=$CUSTOM_BRICKS_PATH \
+-v $MXCUBE2_ROOT:/MXCuBE/mxcube \
+-v $GPHL_SOFTWARE_ROOT:$GPHL_SOFTWARE_ROOT \
+-v $DATA_ROOT:$DATA_ROOT \
+-v $OUTPUT_HOME:$DOCKER_HOME \
+-v /tmp/.X11-unix:/tmp/.X11-unix \
+$CONTAINER

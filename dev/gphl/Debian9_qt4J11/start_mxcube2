@@ -31,7 +31,7 @@ DOCKER_USER_ID="1000:100"
 USER_NAME="test_user"
 
 # Directories set-up
-#
+#docker run --hrlp
 # MXCuBE installation is in /MXCuBE/mxcube, as per standard
 #
 # Home directory, used for e.g. .config and .ssh. Externally mounted.
